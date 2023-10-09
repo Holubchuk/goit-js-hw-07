@@ -25,21 +25,22 @@ function renderList() {
 
 renderList();
 
+list.addEventListener("click", imageOpen);
 
-
-list.addEventListener("click", handleClick);
-
-function handleClick(event) {
+function imageOpen(event) {
   event.preventDefault();
-  let imageUrl;
-  if (event.target.nodeName === "IMG") {
-    imageUrl = galleryItems.original;
-  } else if (event.target.nodeName === "A") {
-    imageUrl = galleryItems.original;
-  } else if (event.target.nodeName === "LI") {
-    imageUrl = galleryItems.original;
-  } else {
+  if (event.target.nodeName !== "IMG") {
     return;
   }
-  console.log(imageUrl);
+
+  const instance = basicLightbox.create(`
+  <img src="${event.target.dataset.source}" width="800" height="600">
+`);
+  instance.show();
+
+  list.addEventListener("keydown", (event) => {
+    if (event.code === "Escape") {
+      instance.close();
+    }
+  });
 }
