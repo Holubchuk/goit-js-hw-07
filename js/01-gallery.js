@@ -21,11 +21,10 @@ function renderList() {
     })
     .join("");
   list.innerHTML = markup;
+  list.addEventListener("click", imageOpen);
 }
 
 renderList();
-
-list.addEventListener("click", imageOpen);
 
 function imageOpen(event) {
   event.preventDefault();
@@ -38,9 +37,13 @@ function imageOpen(event) {
 `);
   instance.show();
 
-  list.addEventListener("keydown", (event) => {
+  window.addEventListener("keydown", imageClose);
+
+  function imageClose(event) {
     if (event.code === "Escape") {
       instance.close();
     }
-  });
+  }
 }
+
+window.removeEventListener("keydown", imageClose);
