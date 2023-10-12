@@ -26,24 +26,24 @@ function renderList() {
 
 renderList();
 
+let instance;
+
 function imageOpen(event) {
   event.preventDefault();
   if (event.target.nodeName !== "IMG") {
     return;
   }
 
-  const instance = basicLightbox.create(`
+  instance = basicLightbox.create(`
   <img src="${event.target.dataset.source}" width="800" height="600">
 `);
   instance.show();
-
   window.addEventListener("keydown", imageClose);
-
-  function imageClose(event) {
-    if (event.code === "Escape") {
-      instance.close();
-    }
-  }
 }
 
-window.removeEventListener("keydown", imageClose);
+function imageClose(event) {
+  if (event.code === "Escape") {
+    instance.close();
+  }
+  window.removeEventListener("keydown", imageClose);
+}
