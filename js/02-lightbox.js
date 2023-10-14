@@ -6,7 +6,6 @@ console.log(galleryItems);
 
 const list = document.querySelector(".gallery");
 
-function renderList() {
   const markup = galleryItems
     .map(({ preview, original, description }) => {
       return `<li class="gallery__item">
@@ -17,16 +16,17 @@ function renderList() {
     })
     .join("");
   list.innerHTML = markup;
+  
   list.addEventListener("click", imageOpen);
-}
 
-renderList();
-
+  let lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: "alt",
+    captionDelay: 250
+  });
+  
 function imageOpen(event) {
     event.preventDefault();
-    let lightbox = new SimpleLightbox('.gallery a', {
-        captionsData: "alt",
-        captionDelay: 250
+    lightbox.on('show.simplelightbox', function () {
     });
-    
 };
+

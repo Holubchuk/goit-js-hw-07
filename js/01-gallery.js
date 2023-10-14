@@ -5,7 +5,6 @@ console.log(galleryItems);
 
 const list = document.querySelector(".gallery");
 
-function renderList() {
   const markup = galleryItems
     .map(({ preview, original, description }) => {
       return `<li class="gallery__item">
@@ -22,9 +21,6 @@ function renderList() {
     .join("");
   list.innerHTML = markup;
   list.addEventListener("click", imageOpen);
-}
-
-renderList();
 
 let instance;
 
